@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pregnancy Notes · Month 4</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: #fdf6ee;
+      font-family: 'DM Sans', sans-serif;
+      padding: 32px 20px 60px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, #f9d9c0 0%, transparent 70%);
+      top: -150px; left: -150px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, #d4eac8 0%, transparent 70%);
+      bottom: -100px; right: -100px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 36px;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 0.6s ease both;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      color: #3a2e25;
+    }
+    .page-header h1 em { font-style: italic; color: #b07c46; }
+    .page-header p { font-size: 13px; color: #b0967a; margin-top: 6px; font-weight: 300; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 1060px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: #fffdf9;
+      border-radius: 24px;
+      padding: 36px 32px 32px;
+      box-shadow: 0 8px 40px rgba(180,140,100,0.11), 0 2px 8px rgba(0,0,0,0.04);
+      animation: fadeUp 0.7s ease both;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .card:nth-child(2) { animation-delay: 0.12s; }
+
+    .card-tag {
+      display: inline-block;
+      background: #f0ebe2;
+      color: #9c7a52;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+    .card-tag.blue-tag { background: #ddeef8; color: #4a84a8; }
+
+    .card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: #3a2e25;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .card h2 em { font-style: italic; color: #b07c46; }
+    .card .subtitle {
+      font-size: 12px;
+      color: #b0967a;
+      font-weight: 300;
+      margin-bottom: 24px;
+    }
+    .divider {
+      width: 36px; height: 2px;
+      background: #e8d5be;
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    /* ── BODY CHANGE ITEMS ── */
+    .change-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #f5ede0;
+    }
+    .change-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .change-icon {
+      font-size: 20px;
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .bg-peach { background: #fde8d8; }
+    .bg-green { background: #e8f4e2; }
+    .bg-blue  { background: #ddeef8; }
+    .bg-pink  { background: #fde0ec; }
+    .bg-yellow{ background: #fef6d8; }
+    .bg-purple{ background: #ede5f8; }
+    .bg-sage  { background: #e2f0e8; }
+    .bg-cream { background: #f5ede0; }
+
+    .change-body {}
+    .change-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #3a2e25;
+      margin-bottom: 3px;
+    }
+    .change-desc {
+      font-size: 12px;
+      color: #a08870;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 100px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .badge-normal { background: #e8f4e2; color: #5a9a6a; }
+    .badge-doctor { background: #fde8d8; color: #c07a4a; }
+
+    /* ── REMINDER ITEMS ── */
+    .reminder-section {
+      margin-bottom: 24px;
+    }
+    .reminder-section:last-child { margin-bottom: 0; }
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: #c4a882;
+      margin-bottom: 12px;
+    }
+
+    .r-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .r-item:last-child { margin-bottom: 0; }
+    .r-icon {
+      font-size: 18px;
+      width: 38px; height: 38px;
+      border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .r-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #3a2e25;
+      margin-bottom: 2px;
+    }
+    .r-desc {
+      font-size: 11.5px;
+      color: #a08870;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── EXERCISE ACCORDION ── */
+    .exercise-list {
+      margin-top: 4px;
+    }
+    .ex-item {
+      border: 1px solid #f0e8dc;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+    .ex-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 14px;
+      cursor: pointer;
+      background: #fffdf9;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    .ex-header:hover { background: #fdf6ee; }
+    .ex-header-left { display: flex; align-items: center; gap: 10px; }
+    .ex-num {
+      font-size: 10px;
+      font-weight: 700;
+      color: #c4a882;
+      width: 20px;
+    }
+    .ex-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: #3a2e25;
+    }
+    .ex-arrow {
+      font-size: 11px;
+      color: #c4a882;
+      transition: transform 0.25s;
+    }
+    .ex-item.open .ex-arrow { transform: rotate(180deg); }
+    .ex-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .ex-item.open .ex-body { max-height: 400px; }
+    .ex-content {
+      padding: 0 14px 14px 14px;
+      border-top: 1px solid #f5ede0;
+    }
+    .ex-how {
+      font-size: 11.5px;
+      color: #7a6655;
+      line-height: 1.7;
+      padding-top: 10px;
+    }
+    .ex-reps {
+      margin-top: 8px;
+      display: inline-block;
+      background: #f0ebe2;
+      color: #9c7a52;
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── FOOTER ── */
+    .card-footer {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid #f0e8dc;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 12.5px;
+      color: #c4a882;
+    }
+    .footer-badge {
+      background: #f5ede0;
+      color: #b07c46;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 13px;
+      border-radius: 100px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <h1>Notes for <em>My Love</em> 🌿</h1>
+    <p>Month 4 · Week 13–16 · A little guide from your husband</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- ══ CARD 1: BODY CHANGES ══ -->
+    <div class="card">
+      <span class="card-tag">🌸 Body Changes</span>
+      <h2>What your body is <em>going through</em></h2>
+      <p class="subtitle">All normal — you're doing amazing, seriously.</p>
+      <div class="divider"></div>
+
+      <div class="change-item">
+        <div class="change-icon bg-blue">😮‍💨</div>
+        <div class="change-body">
+          <div class="change-title">Shortness of Breath <span class="badge badge-normal">Normal</span></div>
+          <div class="change-desc">Hormones + your growing womb pressing up. If it gets so bad it limits your movement, see the doctor right away.</div>
+        </div>
+      </div>
+
+      <div class="change-item">
+        <div class="change-icon bg-peach">🤧</div>
+        <div class="change-body">
+          <div class="change-title">Stuffy Nose <span class="badge badge-normal">Normal</span></div>
+          <div class="change-desc">Hormone-related. Use a saline nasal spray or inhaler (like Plossa) for relief — totally safe during pregnancy.</div>
+        </div>
+      </div>
+
+      <div class="change-item">
+        <div class="change-icon bg-pink">🩸</div>
+        <div class="change-body">
+          <div class="change-title">Vaginal Discharge <span class="badge badge-normal">Normal</span></div>
+          <div class="change-desc">Safe as long as it looks and smells normal. Use a panty liner for comfort — no internal washing needed, it'll clean itself.</div>
+        </div>
+      </div>
+
+      <div class="change-item">
+        <div class="change-icon bg-green">💓</div>
+        <div class="change-body">
+          <div class="change-title">Blood Pressure Rise <span class="badge badge-normal">Normal</span></div>
+          <div class="change-desc">A slight increase is expected as your blood volume grows. Keep up with your prenatal checkups.</div>
+        </div>
+      </div>
+
+      <div class="change-item">
+        <div class="change-icon bg-yellow">⚖️</div>
+        <div class="change-body">
+          <div class="change-title">Weight Gain <span class="badge badge-normal">Normal</span></div>
+          <div class="change-desc">Don't panic — but don't use it as an excuse to eat everything either 😅 Swap ice cream for smoothies or healthy snacks to keep pace steady.</div>
+        </div>
+      </div>
+
+      <div class="change-item">
+        <div class="change-icon bg-cream">👗</div>
+        <div class="change-body">
+          <div class="change-title">Time to Buy Maternity Clothes</div>
+          <div class="change-desc">Only buy when your regular clothes truly don't fit anymore — and buy little by little since sizes keep changing.<br><br>
+          <strong>Tips:</strong> Dark colors · Solid tops & bottoms · Small or vertical prints (no wide horizontal stripes) · True-to-size fit, not too loose or too tight.</div>
+        </div>
+      </div>
+
+      <div class="change-item">
+        <div class="change-icon bg-purple">🧠</div>
+        <div class="change-body">
+          <div class="change-title">Forgetfulness <span class="badge badge-normal">Normal</span></div>
+          <div class="change-desc">Brain cells literally shrink during pregnancy — it's a real thing! Eat protein + complex carbs, sleep well, and lean on me to remind you of things 🤍</div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <span class="footer-quote">You're growing a human, give yourself grace 🤍</span>
+        <span class="footer-badge">Month 4</span>
+      </div>
+    </div>
+
+    <!-- ══ CARD 2: REMINDERS + EXERCISES ══ -->
+    <div class="card">
+      <span class="card-tag blue-tag">📋 Daily Reminders</span>
+      <h2>Things to <em>keep up with</em> every day</h2>
+      <p class="subtitle">Small habits, big impact for you and baby.</p>
+      <div class="divider"></div>
+
+      <!-- Daily Care -->
+      <div class="reminder-section">
+        <div class="section-label">Daily Care</div>
+
+        <div class="r-item">
+          <div class="r-icon bg-green">🍊</div>
+          <div>
+            <div class="r-title">Eat Vitamin C-rich food</div>
+            <div class="r-desc">Oranges, strawberries, bell peppers, broccoli — pick your fave daily!</div>
+          </div>
+        </div>
+
+        <div class="r-item">
+          <div class="r-icon bg-peach">🪥</div>
+          <div>
+            <div class="r-title">Brush teeth — gently</div>
+            <div class="r-desc">Gums are extra sensitive now. Go slow, soft bristle only.</div>
+          </div>
+        </div>
+
+        <div class="r-item">
+          <div class="r-icon bg-blue">🚿</div>
+          <div>
+            <div class="r-title">Use the water flosser</div>
+            <div class="r-desc">Kinder on your gums than regular floss — use it daily.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Movement -->
+      <div class="reminder-section">
+        <div class="section-label">Movement & Exercise</div>
+
+        <div class="r-item">
+          <div class="r-icon bg-sage">🚶‍♀️</div>
+          <div>
+            <div class="r-title">Move at least 30 min/day</div>
+            <div class="r-desc">Walking, swimming, prenatal yoga, or pregnancy aerobics — 4x/week minimum. Ask your doctor which is best for you. <strong>No lying flat on your back.</strong> Always warm up & cool down.</div>
+          </div>
+        </div>
+
+        <div class="r-item">
+          <div class="r-icon bg-yellow">⏱️</div>
+          <div>
+            <div class="r-title">Walk 5–10 min every hour</div>
+            <div class="r-desc">If you sit all day at work, get up every hour or your ankles will swell. I'll remind you 🙂</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pregnancy Exercises Accordion -->
+      <div class="reminder-section">
+        <div class="section-label">Basic Pregnancy Exercises (Tap to expand)</div>
+        <div class="exercise-list">
+
+          <div class="ex-item">
+            <div class="ex-header" onclick="toggle(this)">
+              <div class="ex-header-left"><span class="ex-num">01</span><span class="ex-name">Shoulder Stretch</span></div>
+              <span class="ex-arrow">▼</span>
+            </div>
+            <div class="ex-body">
+              <div class="ex-content">
+                <div class="ex-how">Sit or stand tall. Roll shoulders backward in big, slow circles — down, back, up, forward. Keep breathing throughout. Then reverse direction.</div>
+                <span class="ex-reps">⏱ 2–4 sets · 8–10 circles each direction</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ex-item">
+            <div class="ex-header" onclick="toggle(this)">
+              <div class="ex-header-left"><span class="ex-num">02</span><span class="ex-name">Standing Leg Stretch</span></div>
+              <span class="ex-arrow">▼</span>
+            </div>
+            <div class="ex-body">
+              <div class="ex-content">
+                <div class="ex-how">Stand facing a wall with hands on it. Step one foot back, toes forward. Keep back heel on floor, front knee bent. Lean hips forward until you feel a calf stretch. Hold, then switch.</div>
+                <span class="ex-reps">⏱ 2–4 sets · Hold 15–30 sec each leg</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ex-item">
+            <div class="ex-header" onclick="toggle(this)">
+              <div class="ex-header-left"><span class="ex-num">03</span><span class="ex-name">Dromedary Droop</span></div>
+              <span class="ex-arrow">▼</span>
+            </div>
+            <div class="ex-body">
+              <div class="ex-content">
+                <div class="ex-how">Get on hands and knees. Wrists below shoulders, knees below hips. Breathe in — let back stay flat. Breathe out — gently round back up like the letter C, tuck head down. Then release back to flat (not sagging). Rock pelvis gently.</div>
+                <span class="ex-reps">⏱ 8–12 reps · slow and controlled</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ex-item">
+            <div class="ex-header" onclick="toggle(this)">
+              <div class="ex-header-left"><span class="ex-num">04</span><span class="ex-name">Neck Stretch</span></div>
+              <span class="ex-arrow">▼</span>
+            </div>
+            <div class="ex-body">
+              <div class="ex-content">
+                <div class="ex-how">Sit or stand tall. Slowly drop chin to chest — hold. Return to center. Then turn head right, hold; turn left, hold. Keep shoulders relaxed throughout. Don't force it.</div>
+                <span class="ex-reps">⏱ 2–4 reps each direction · Hold 15–30 sec</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ex-item">
+            <div class="ex-header" onclick="toggle(this)">
+              <div class="ex-header-left"><span class="ex-num">05</span><span class="ex-name">Leg Raise</span></div>
+              <span class="ex-arrow">▼</span>
+            </div>
+            <div class="ex-body">
+              <div class="ex-content">
+                <div class="ex-how">Sit on a chair, feet hip-width apart. Tighten tummy. Lift one knee to a comfortable height, keeping leg bent. Slowly straighten leg without locking the knee. Lower and repeat. Alternate legs.</div>
+                <span class="ex-reps">⏱ 8–10 reps each leg · 2–3 sets</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ex-item">
+            <div class="ex-header" onclick="toggle(this)">
+              <div class="ex-header-left"><span class="ex-num">06</span><span class="ex-name">Tailor Stretch</span></div>
+              <span class="ex-arrow">▼</span>
+            </div>
+            <div class="ex-body">
+              <div class="ex-content">
+                <div class="ex-how">Sit on the floor with legs wide in a V shape, back straight. Reach hands forward toward right foot — hold. Return to center. Reach straight forward — hold. Reach toward left foot — hold. Keep hips flat on floor throughout.</div>
+                <span class="ex-reps">⏱ 2–4 reps each direction · Hold 15–30 sec</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ex-item">
+            <div class="ex-header" onclick="toggle(this)">
+              <div class="ex-header-left"><span class="ex-num">07</span><span class="ex-name">Clamming</span></div>
+              <span class="ex-arrow">▼</span>
+            </div>
+            <div class="ex-body">
+              <div class="ex-content">
+                <div class="ex-how">Lie on your side with a pillow between knees. Keep feet together, bend knees at 90°. Keeping feet touching, rotate top knee upward like a clamshell opening. Don't let your hips roll back. Lower slowly and repeat. Switch sides.</div>
+                <span class="ex-reps">⏱ 10–15 reps each side · 2–3 sets</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ex-item">
+            <div class="ex-header" onclick="toggle(this)">
+              <div class="ex-header-left"><span class="ex-num">08</span><span class="ex-name">Waist Twist</span></div>
+              <span class="ex-arrow">▼</span>
+            </div>
+            <div class="ex-body">
+              <div class="ex-content">
+                <div class="ex-how">Sit on floor with legs crossed (or on a chair with feet flat). Put left hand on right knee, right hand behind you for support. Slowly twist torso to the right. Hold, return to center. Switch sides.</div>
+                <span class="ex-reps">⏱ 2–4 reps each side · Hold 15–20 sec</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ex-item">
+            <div class="ex-header" onclick="toggle(this)">
+              <div class="ex-header-left"><span class="ex-num">09</span><span class="ex-name">Hip Flexor Stretch</span></div>
+              <span class="ex-arrow">▼</span>
+            </div>
+            <div class="ex-body">
+              <div class="ex-content">
+                <div class="ex-how">Kneel on right knee, left foot forward at a 90° angle. Keep back straight. Squeeze glutes and shift hips forward gently until you feel a stretch in the front of the right hip/thigh. Hold, then switch sides.</div>
+                <span class="ex-reps">⏱ 3 reps each side · Hold 30 sec</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ex-item">
+            <div class="ex-header" onclick="toggle(this)">
+              <div class="ex-header-left"><span class="ex-num">10</span><span class="ex-name">Triangle Pose</span></div>
+              <span class="ex-arrow">▼</span>
+            </div>
+            <div class="ex-body">
+              <div class="ex-content">
+                <div class="ex-how">Stand with feet wide apart. Point right foot out, left foot slightly in. Arms out wide. Inhale, then exhale and hinge sideways over the right leg, reaching right hand toward shin/ankle. Left arm reaches up. Hold, then switch sides.</div>
+                <span class="ex-reps">⏱ 3–5 sets each side · Hold 20–30 sec</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ex-item">
+            <div class="ex-header" onclick="toggle(this)">
+              <div class="ex-header-left"><span class="ex-num">11</span><span class="ex-name">Plank</span></div>
+              <span class="ex-arrow">▼</span>
+            </div>
+            <div class="ex-body">
+              <div class="ex-content">
+                <div class="ex-how">Start in an inclined plank — hands on a stable surface (not floor if it's too hard on wrists). Body in a straight line, core engaged, breathe normally. Don't let hips sag or rise. Slowly lower chest and press back up.</div>
+                <span class="ex-reps">⏱ 5–10 reps · or hold 10–20 sec</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ex-item">
+            <div class="ex-header" onclick="toggle(this)">
+              <div class="ex-header-left"><span class="ex-num">12</span><span class="ex-name">Ball Exercise</span></div>
+              <span class="ex-arrow">▼</span>
+            </div>
+            <div class="ex-body">
+              <div class="ex-content">
+                <div class="ex-how">Sit on a pregnancy ball with feet hip-width apart, back straight. Gently rock hips side to side or in circles. For chest opener: place ball in a corner, sit back on it, hands behind head, let elbows open outward and breathe deeply.</div>
+                <span class="ex-reps">⏱ 3–5 sets · 30–60 sec per movement</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <span class="footer-quote">With love, always 🤍</span>
+        <span class="footer-badge">Month 4</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggle(header) {
+      const item = header.parentElement;
+      item.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
